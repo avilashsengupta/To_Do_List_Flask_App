@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo-List {% block title %} {% endblock title %}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav class="h-[56px] bg-gray-100 px-5 flex items-center space-x-3">
+        <p class="font-bold md:text-lg">My ToDo-List</p>
+        <a href="/">
+            <button type="button" class="text-sm text-blue-500 border-[1px] border-blue-500 font-bold
+            px-2 py-1 rounded hover:bg-blue-500 hover:text-white">Home</button>
+        </a>
+        <a href="/create">
+            <button type="button" class="text-sm text-blue-500 border-[1px] border-blue-500 font-bold
+            px-2 py-1 rounded hover:bg-blue-500 hover:text-white">Create</button>
+        </a>
+    </nav>
+    {% block body %} {% endblock body %}
+</body>
+</html>
