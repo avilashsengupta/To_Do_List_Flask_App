@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+{% block title %} Home {% endblock title %}
+{% block body %}
+<div class="bg-[rgb(175,190,240)] py-3 grid grid-cols-2 md:grid-cols-4 font-bold gap-3">
+    <div class="text-sm flex items-center justify-center space-x-1">
+        <div class="px-5 py-2 rounded-full border-[1px] border-[rgb(48,90,132)] bg-[rgb(220,230,250)]">
+            <span>New</span>:
+            <span>{{new_data}}</span>
+        </div>
+    </div>
+    <div class="text-sm flex items-center justify-center space-x-1">
+        <div class="px-5 py-2 rounded-full border-[1px] border-[rgb(48,90,132)] bg-[rgb(220,230,250)]">
+            <span>In Progress</span>:
+            <span>{{progress_data}}</span>
+        </div>
+    </div>
+    <div class="text-sm flex items-center justify-center space-x-1">
+        <div class="px-5 py-2 rounded-full border-[1px] border-[rgb(48,90,132)] bg-[rgb(220,230,250)]">
+            <span>Completed</span>:
+            <span>{{complete_data}}</span>
+        </div>
+    </div>
+    <div class="text-sm flex items-center justify-center space-x-1">
+        <div class="px-5 py-2 rounded-full border-[1px] border-[rgb(48,90,132)] bg-[rgb(220,230,250)]">
+            <span>Total</span>:
+            <span>{{total_data}}</span>
+        </div>
+    </div>
+</div>
+<div class="flex items-center justify-center p-5">
+    <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-5">
+        {% for item in full_list %}
+        <div class="bg-slate-100 border-[1px] border-[rgb(55,75,105)]">
+            <div class="bg-[rgb(55,75,105)] flex items-center justify-between px-2 h-8 text-sm">
+                <span class="font-bold text-white">Task #{{loop.index}}</span>
+                <a href="/delete/{{item.slno}}">
+                    <button type="button" class="h-5 w-5 bg-[rgb(250,70,70)] text-white">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </a>
+            </div>
+            <div class="px-3 py-2 text-sm grid grid-cols-1 gap-2">
+                <p><span class="font-bold">Task</span>: {{item.text}}</p>
+                <p><span class="font-bold">Date</span>: {{item.date}}</p>
+                <p><span class="font-bold">Time</span>: {{item.time}}</p>
+                <p><span class="font-bold">Status</span>: {{item.stat}}</p>
+                <div class="flex space-x-2">
+                {% if item.stat != 'Completed' %}
+                    <a href="/update/{{item.slno}}">
+                        <button type="button" class="px-3 py-1 font-semibold text-sm
+                        bg-blue-500 text-white">Update</button>
+                    </a>
+                    <form action="/status/{{item.slno}}" method="POST">
+                        <a href="/status/{{item.slno}}">
+                            <button type="submit" class="px-3 py-1 font-semibold text-sm bg-[rgb(45,195,60)]
+                            text-white">
+                            {% if item.stat == 'New' %}
+                                Start
+                            {% elif item.stat == 'In Progress' %}
+                                Finish
+                            {% endif %}
+                            </button>
+                        </a>
+                    </form>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}

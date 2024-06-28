@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% block title %} Create {% endblock title %}
+{% block body %}
+<div class="flex items-center justify-center p-5">
+    <form action="/create" method="POST" class="max-[610px]:w-full md:w-[600px] bg-[rgb(225,235,245)]
+    border-[1px] border-blue-900">
+        <p class="bg-blue-900 text-white text-sm font-bold px-2 py-1">Create New Task</p>
+        <div class="p-2 grid grid-cols-3 gap-2 text-sm">
+            <span class="font-bold col-start-1 col-end-4">Task Name</span>
+            <input type="text" name="task" class="px-2 h-8 w-full border-[1px] border-gray-400 col-start-1 col-end-4">
+            <span class="font-bold col-start-1 col-end-4">Execution Date</span>
+            <input type="date" name="date" class="px-2 h-8 w-full border-[1px] border-gray-400 col-start-1 col-end-4">
+            <span class="font-bold col-start-1 col-end-4">Execution Time</span>
+            <select type="dropdown" name="hour" class="px-2 h-8 w-full border-[1px] border-gray-400">
+                <option value="" hidden>HH</option>
+                {% for i in hours %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+            <select type="dropdown" name="minute" class="px-2 h-8 w-full border-[1px] border-gray-400">
+                <option value="" hidden>MM</option>
+                {% for i in minutes %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+            <select type="dropdown" name="maritime" class="px-2 h-8 w-full border-[1px] border-gray-400">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
+        </div>
+        <button type="submit" class="text-sm font-bold px-2 py-1 bg-blue-700 
+        text-white ml-2 mb-2">Save Task</button>
+    </form>
+</div>
+{% endblock body %}
